@@ -1,11 +1,11 @@
 abstract class car {
 
 public abstract void drive();
-// abstract donot have body 
+// abstract do not have body 
 // it should be declared in abstract class itself .
 // we cannot create object of abstract car 
 
-// abstract class may have abstract method or may not or both as well .
+// abstract class may have abstract method or normal methods or both as well .
 
 public void playMusic(){
     System.out.println(" playing Music ... ");

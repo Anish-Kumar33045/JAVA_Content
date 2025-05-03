@@ -9,18 +9,12 @@ abstract class A
        
 }
 
-
-
 public class Abstract_class{
     public static void main (String arg[]){
            
          A obj = new A();
          obj.show();
-         
-
         
-
-
     }
 
 }

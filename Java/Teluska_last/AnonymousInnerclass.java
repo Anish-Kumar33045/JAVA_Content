@@ -5,22 +5,22 @@ class A
          System.out.println(" in A  show ");
       }
 
-    //    class B 
-    // {
-    //     public void config()
-    //     {
-    //        System.out.println(" in B config ");
-    //     }
-    // }
-
-}
-  class B extends A
+       class B 
     {
-        public void show()
+        public void config()
         {
-           System.out.println(" in B show ");
+           System.out.println(" in B config ");
         }
     }
+
+}
+//   class B extends A
+//     {
+//         public void show()
+//         {
+//            System.out.println(" in B show ");
+//         }
+//     }
 
 
 
@@ -45,10 +45,18 @@ public class AnonymousInnerclass{
 
                          
         //  B obj1 = new B();
-        // //  A.B obj1 = obj.new B();
-        //  obj1.config();
+         A.B obj1 = obj.new B(); // 
+         obj1.config();
+/*
+ * In this snippet:
 
+A.B: Refers to class B defined within class A.
 
+obj.new B(): Creates an instance of the inner class B associated with the instance obj of the outer class A.
+ This syntax is necessary because non-static inner classes hold an implicit reference to their enclosing class instance.
+
+obj1.config(): Calls the config() method of the inner class B.
+ */
     }
 
 }

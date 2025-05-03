@@ -11,11 +11,12 @@ class A
 class B extends A
 {
     // public void show()
-
-    // public void showTheDataWhichBelongToThisClassAndwhichistoolong()   // there is spelling mistake in the word "belongs" "belong"
-    // so it executes A show 
+     // so it executes A show 
     // this type of error occurs normally 
-    // to prevent it we can use annotations 
+    // to prevent it we can use annotations
+
+    // public void showTheDataWhichBelongToThisClassAndwhichistoolong();   // there is spelling mistake in the word "belongs" "belong"
+    
 
 
 @Override
