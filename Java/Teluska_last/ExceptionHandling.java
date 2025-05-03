@@ -4,8 +4,8 @@
 
 class ExceptionHandling {
     public static void main(String[] args) {
-        // int i = 0;
-        int i = 2;
+        int i = 0;
+        // int i = 2;
 
         int j = 0;
         
@@ -35,7 +35,6 @@ class ExceptionHandling {
     //    }
 
 catch (ArithmeticException e) { 
-
 
         System.out.println("cannot divide by zero "+ e);
        }

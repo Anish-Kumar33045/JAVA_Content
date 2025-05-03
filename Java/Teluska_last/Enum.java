@@ -10,7 +10,7 @@ public class Enum{
     public static void main(String[] args) 
     {
 
-        //  ex - int i =  5 ; // same as normal variable declartion . 
+        //  Ex :- int i =  5 ; // same as normal variable declartion . 
         
         Status s = Status.Running;
         Status s1 = Status.Failed;

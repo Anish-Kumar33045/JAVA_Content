@@ -17,9 +17,9 @@ VirtualMachineError        Arithematic                 // unchecked exeception
 
 class Exception2 {
     public static void main(String[] args) {
-        // int i = 0;
+        int i = 0;
         // int i = 2;
-        int i = 20;
+        
         int j = 0;
         
           int nums[]= new int[5];
@@ -31,6 +31,7 @@ class Exception2 {
                 throw new ArithmeticException("Message can be sent here also");  
        } 
 
+       //in Java, one try block can have multiple catch blocks.
 
 catch (ArithmeticException e) { 
         System.out.println("Error 404 "+ e);
