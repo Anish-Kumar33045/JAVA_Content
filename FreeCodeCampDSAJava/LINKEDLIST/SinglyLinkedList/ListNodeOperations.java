@@ -24,16 +24,17 @@ public class ListNodeOperations extends Reverse {
     }
 
     // Get the nth node from the end of the linked list
-    public ListNode getNthNode(int n) {
+    public ListNode getNthFromEnd(int n) {
         if (head == null) {
             throw new IllegalArgumentException("The list is empty.");
         }
 
         ListNode mainPtr = head, refPtr = head;
 
-        // Move refPtr n steps ahead
-        int count = 0;
-        while (count < n) {
+        // Move refPtr n steps ahead from mainPtr
+        int count = 1;
+        // you start from count = 0 , then logic changes but concept is same 
+        while (count < n - 1) {
             if (refPtr == null) {
                 throw new IllegalArgumentException("n is larger than the list size.");
             }
@@ -41,14 +42,46 @@ public class ListNodeOperations extends Reverse {
             count++;
         }
 
+/*
+🤔 The Trick:
+You create a fixed distance (gap) of n between two pointers (refPtr and mainPtr).
+
+So:
+
+When refPtr reaches the end (null),
+
+mainPtr will be exactly n nodes behind it,
+
+Meaning mainPtr is at the Nth node from the end.
+*/
         // Move both pointers until refPtr reaches the end
-        while (refPtr != null) {
+        while (refPtr.next != null) {
             mainPtr = mainPtr.next;
             refPtr = refPtr.next;
         }
 
         return mainPtr;
     }
+
+// from first
+    public ListNode getNthFromStart(int n){
+         if (head == null) {
+            throw new IllegalArgumentException("The list is empty.");
+        }
+        ListNode temp = head;
+         int count = 1;
+
+         while(count < n && temp!=null){
+            
+            temp= temp.next;
+            count++;
+         }
+         if (temp == null) {
+                throw new IllegalArgumentException("n is larger than the list size.");
+            }
+
+return temp;
+}
 
     // remove duplicates from sorted array
     /*
@@ -63,6 +96,7 @@ public class ListNodeOperations extends Reverse {
      */
     public void removeDuplicates() {
         ListNode current = head;
+        
         while (current != null && current.next != null) {
             if (current.data == current.next.data) {
                 current.next = current.next.next;
@@ -151,7 +185,7 @@ public class ListNodeOperations extends Reverse {
         System.out.println("Number of nodes: " + obj.countNodes());
 
         // Get and display the 3rd node from the end
-        ListNode nthNode = obj.getNthNode(3);
+        ListNode nthNode = obj.getNthFromEnd(3);
         System.out.println("The 3rd node from the end is: " + nthNode);
 
         System.out.println("removes duplicate method ");

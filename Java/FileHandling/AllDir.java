@@ -1,3 +1,4 @@
+
 // Java Program to display all
 // the contents of a directory
 import java.io.BufferedReader;
@@ -5,54 +6,72 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-// Displaying the contents of a directory
-class AllDir 
-{
-    public static void main(String[] args)
-        throws IOException
-    {
-        // Enter the path and dirname
-        BufferedReader br = new BufferedReader(
-            new InputStreamReader(System.in));
+public class AllDir {
 
-        System.out.print("Enter directory path : ");
-        String dirpath = br.readLine();
-      
-        System.out.print("Enter the directory name : ");
-        String dname = br.readLine();
+    public static void main(String[] args) {
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // Create File object with dirpath and dname
-        File f = new File(dirpath, dname);
+            System.out.print("Enter directory path : ");
+            String dirpath = br.readLine();
 
-        // If directory exists,then
-        if (f.exists()) {
-            
-          	// Get the contents into arr[]
-            // now arr[i] represent either a File or
-            // Directory
-            String arr[] = f.list();
+            System.out.print("Enter the directory name : ");
+            String dname = br.readLine();
 
-            // Find no. of entries in the directory
-            int n = arr.length;
+            File f = new File(dirpath, dname);
 
-            // Displaying the entries
-            for (int i = 0; i < n; i++) {
+            if (f.exists() && f.isDirectory()) {
+                String[] arr = f.list();
 
-                System.out.print(arr[i] + " ");
+                if (arr != null) {
+                    int n = arr.length;
 
-                // Create File object with the entry and
-                // test if it is a file or directory
-                File f1 = new File(f,arr[i]);
+                    for (int i = 0; i < n; i++) {
+                        System.out.print(arr[i] + " ");
+                        File f1 = new File(f, arr[i]);
 
-                if (f1.isFile())
-                    System.out.println(": is a file");
-                if (f1.isDirectory())
-                    System.out.println(": is a directory");
+                        if (f1.isFile()) {
+                            System.out.println(": is a file");
+                        }
+                        if (f1.isDirectory()) {
+                            System.out.println(": is a directory");
+                        }
+                    }
+
+                    System.out.println("\nNo of entries in this directory : " + n);
+                } else {
+                    System.out.println("Could not list contents or directory is empty.");
+                }
+            } else {
+                System.out.println("Directory not found or is not a directory.");
             }
-
-            System.out.println("\nNo of entries in this directory : " + n);
+        } catch (IOException e) {
+            System.out.println("Error reading input: " + e.getMessage());
         }
-        else
-            System.out.println("Directory not found");
     }
 }
+
+
+/*
+dirpath — the parent directory path
+
+dname — the name of a file or subdirectory inside that directory
+
+ So:
+
+Enter directory path : C:\Users\anish\OneDrive\Desktop\coding\JAVA_Content\Java
+Enter the directory name : FileHandling
+
+Then:
+
+f will represent C:\Users\anish\OneDrive\Desktop\coding\JAVA_Content\Java\FileHandling
+
+In short:
+dirpath contains dname
+
+dname is inside the directory dirpath
+
+You're referring to a file or directory at that combined path
+
+
+ */

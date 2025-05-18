@@ -2,6 +2,8 @@
 
 
 
+
+
 public class Insert {
 
     private  ListNode head;
@@ -85,20 +87,21 @@ public class Insert {
       */
       public void insert_At_Position(int value, int position){
           ListNode node = new ListNode(value);
-          if(position == 1 ){
+          if(position == 1 || head == null ){
             node.next = head ;
             head = node ;
           }
           else{
              ListNode previous = head;
              int count = 1;
-             while( count < position - 1){
+             while( count < position-1){
                 previous = previous.next;
                 count++;
              } 
              ListNode current = previous.next;
              node.next = current;
              previous.next = node;
+
           }
          }
 
@@ -130,18 +133,19 @@ public class Insert {
         obj.insertFirst(20);
         obj.insertFirst(30);
         obj.display();
+       System.out.println( obj.length());
           
-        System.out.println("insert last operation");
-        obj.insertLast(50);
-        obj.display();
+        // System.out.println("insert last operation");
+        // obj.insertLast(50);
+        // obj.display();
 
-        System.out.println("Insert at position operation");
-        obj.insert_At_Position(50, 4);
-        obj.display();
+        // System.out.println("Insert at position operation");
+        // obj.insert_At_Position(50, 4);
+        // obj.display();
 
-        System.out.println("Length of LinkedList is : "+ obj.length());
+        // System.out.println("Length of LinkedList is : "+ obj.length());
 
-        System.out.println("Search A node by value 30 is "+obj.searchNode(30));
+        // System.out.println("Search A node by value 30 is "+obj.searchNode(30));
 
         
         

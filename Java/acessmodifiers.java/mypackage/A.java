@@ -1,6 +1,6 @@
 
 
-class A {
+public class A {
     int marks = 6;
 }
  

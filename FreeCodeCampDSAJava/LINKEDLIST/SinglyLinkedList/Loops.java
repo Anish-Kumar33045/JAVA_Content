@@ -23,28 +23,47 @@ public class Loops {
     }
 
      //removes loop 
-     public void removeLoop(){
-        ListNode fastPtr = head;
-        ListNode slowPtr = head;
+     static void removeLoop(ListNode head) {
 
-        while(fastPtr != null && fastPtr.next != null){
-            fastPtr = fastPtr.next.next;
-            slowPtr = slowPtr.next;
+        // If list is empty or has only one node  without loop 
+      
 
-            if(fastPtr == slowPtr){
-                removeLoop(slowPtr);
-                return;
+        ListNode slow = head, fast = head;
+
+        // Move slow and fast 1 and 2 steps
+        // ahead respectively.
+        slow = slow.next;
+        fast = fast.next.next;
+
+        // Search for loop using slow and fast pointers
+        while (fast != null && fast.next != null) {
+            if (slow == fast)
+                break;
+
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // If loop exists 
+        if (slow == fast) {
+            slow = head;
+            if (slow != fast) {
+                while (slow.next != fast.next) {
+                    slow = slow.next;
+                    fast = fast.next;
+                }
+              
+                // since fast->next is the looping point remove loop 
+              	fast.next = null; 
+            }
+              // This case is added if fast and slow pointer meet at first position. 
+            else {
+                while(fast.next != slow) {
+                    fast = fast.next;
+                }
+                fast.next = null;
             }
         }
-    }
-
-    private void removeLoop(ListNode slowPtr){
-       ListNode temp = head;
-       while(temp != slowPtr){
-        temp = temp.next;
-        slowPtr = slowPtr.next;
-       }
-       slowPtr.next = null;
     }
 
     public void createALoopInLinkedList(){

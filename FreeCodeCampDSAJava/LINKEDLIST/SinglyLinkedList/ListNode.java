@@ -8,7 +8,12 @@ public class ListNode {
     }
 
     @Override
-    public String toString() {
+    public  String toString() {
         return String.valueOf(data); // Returns the value of the node as a string
+    }
+    public static void main(String[] args) {
+          ListNode obj = new ListNode(10);
+        System.out.println(  obj.toString());
+        System.out.println();
     }
 }

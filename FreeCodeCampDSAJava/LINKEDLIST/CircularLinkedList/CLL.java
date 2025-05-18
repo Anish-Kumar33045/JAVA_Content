@@ -44,7 +44,6 @@ public class CLL {
         ListNode newNode = new ListNode(value);
         if (last == null) {
             last = newNode;
-            last.next = newNode;
         } else {
             newNode.next = last.next;
         }
@@ -80,25 +79,32 @@ public class CLL {
         return temp;
     }
 
+    
     public ListNode deleteLast() {
-        if (isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        ListNode temp = last;
-        ListNode first = last.next;
-        if (last.next == last) {
-            last = null;
-        } else {
-            while (first.next != last) {
-                first = first.next;
-            }
-            first.next = last.next;
-            last = first;
-        }
-        temp.next = null;
-        length--;
-        return temp;
+    if (isEmpty()) {
+        throw new NoSuchElementException();
     }
+
+    ListNode temp = last;
+
+    // If there's only one node
+    if (last.next == last) {
+        last = null;
+    } else {
+        ListNode current = last.next; // Start from first
+        // Traverse until the node before last
+        while (current.next != last) {
+            current = current.next;
+        }
+        current.next = last.next; // Point to first
+        last = current; // Update last
+    }
+
+    temp.next = null;
+    length--;
+    return temp;
+}
+
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);

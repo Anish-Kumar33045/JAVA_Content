@@ -1,107 +1,187 @@
 
-import java.util.Scanner;
-
-
-// left child data  < parent node
-// right child data > parent node
-
 public class BST {
 
-    private TreeNode root;
+    static class Node {
 
-    private class TreeNode{
-        private int data; 
-        private TreeNode left;
-        private TreeNode right;
+        int data;
+        Node left, right;
 
-        public TreeNode (int data){
-            this.data = data;
-        }  
+        Node(int value) {
+            data = value;
+            left = null;
+            right = null;
+        }
     }
 
-    // insert data in BST 
+    // Insert a node into the BST
+    static Node insert(Node root, int key) {
+        if (root == null) {
+            return new Node(key);
+        }
 
-    public void insert (int value){
-        root = insert(root, value);
-    }
+        if (key < root.data) {
+            root.left = insert(root.left, key);
+        } else if (key > root.data) {
+            root.right = insert(root.right, key);
+        }
 
-    public TreeNode insert(TreeNode root , int value ){
-        if(root == null){
-            root= new TreeNode(value);
-            return root;
-        }
-        if(value < root.data){
-            root.left = insert (root.left, value );
-        }
-        else{
-            root.right = insert (root.right , value );
-        }
         return root;
-      }
+    }
 
-
-      // search an element in binary search tree
-      public  TreeNode search(int key){
-        return search(root, key);
-      }
-
-      public TreeNode search(TreeNode root , int key){
-        if(root == null || root.data == key){
-               return root;
-        }
-        if(key<root.data){
-            return search (root.left , key);
-        }
-        else{
-            return search (root.right , key);
-        }
-      }
-
-    //   inorder traversal
-    public void inorder (TreeNode root){
-          if(root != null){
+    // Inorder Traversal (Left - Root - Right)
+    static void inorder(Node root) {
+        if (root != null) {
             inorder(root.left);
             System.out.print(root.data + " ");
             inorder(root.right);
-          }
+        }
     }
 
-    //  finding BST is valid or not 
-    boolean isValid (TreeNode root, long min , long max){
-        if(root==null){
+    // Search for a key in the BST
+    static boolean search(Node root, int key) {
+        if (root == null) {
+            return false;
+        }
+        if (key == root.data) {
+            return true;
+        } else if (key < root.data) {
+            return search(root.left, key);
+        } else {
+            return search(root.right, key);
+        }
+    }
+
+    // Validate BST using min/max boundaries
+    static boolean isValidBST(Node root) {
+        return isValidBSTHelper(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    static boolean isValidBSTHelper(Node root, int min, int max) {
+        if (root == null) {
             return true;
         }
-        // min < root.val < max actually in BST
-        if(root.data <=min || root.data >= max){
+
+        if (root.data <= min || root.data >= max) {
             return false;
         }
 
-        boolean left = isValid(root.left , min, root.data);
-        if(left){
-            boolean right = isValid(root.right, root.data , max);
-            return right;
+        return isValidBSTHelper(root.left, min, root.data)
+                && isValidBSTHelper(root.right, root.data, max);
+    }
+
+    /*
+        15
+       /  \
+     12    18
+    /  \   /  \
+  10   13 7    20
+on iteration 	7 < 15, but in right subtree → violates BST
+
+
+     */
+    // Find Inorder Predecessor
+    static Node inorderPredecessor(Node root) {
+        Node current = root.left;
+        while (current != null && current.right != null) {
+            current = current.right;
         }
-        return false;
+        return current;
     }
-   public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);
 
-    BST bst = new BST();
-    bst.insert(4);
-    bst.insert(3);
-    bst.insert(5);
-    bst.insert(6);
-    bst.insert(2);
-    bst.insert(1);
+    // Find Inorder Successor
+    static Node inorderSuccessor(Node root) {
+        Node current = root.right;
+        while (current != null && current.left != null) {
+            current = current.left;
+        }
+        return current;
+    }
 
-    bst.inorder(bst.root);
-    System.out.print("\nEnter the value to searched : ");
-    int key = scanner.nextInt();
-    if( bst.search(key)!= null){
-        System.out.println("\n key found !!! ");    
+    // Delete using Inorder Predecessor
+    static Node deleteUsingPredecessor(Node root, int key) {
+        if (root == null) {
+            return null;
+        }
+
+        if (key < root.data) {
+            root.left = deleteUsingPredecessor(root.left, key);
+        } else if (key > root.data) {
+            root.right = deleteUsingPredecessor(root.right, key);
+        } else {
+            // Node found
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+
+            Node pred = inorderPredecessor(root);
+            root.data = pred.data;
+            root.left = deleteUsingPredecessor(root.left, pred.data);
+        }
+        return root;
     }
-    else{
-        System.out.println("key Not found !!!");
+
+    // Delete using Inorder Successor
+    static Node deleteUsingSuccessor(Node root, int key) {
+        if (root == null) {
+            return null;
+        }
+
+        if (key < root.data) {
+            root.left = deleteUsingSuccessor(root.left, key);
+        } else if (key > root.data) {
+            root.right = deleteUsingSuccessor(root.right, key);
+        } else {
+            // Node found
+            if (root.left == null) {
+                return root.right;
+                //note : if (root.left == null)       // true
+                // return root.right;       // returns null, since right is also null
+
+            } else if (root.right == null) {
+                return root.left;
+            }
+
+            Node succ = inorderSuccessor(root);
+            root.data = succ.data;
+            root.right = deleteUsingSuccessor(root.right, succ.data);
+        }
+        return root;
     }
-   } 
+
+    public static void main(String[] args) {
+        Node root = null;
+        int[] keys = {50, 30, 70, 20, 40, 60, 80};
+
+        // Insert nodes
+        for (int key : keys) {
+            root = insert(root, key);
+        }
+
+        System.out.println("Original BST (Inorder):");
+        inorder(root);
+
+        // Search operation
+        System.out.println("\n\nSearching for 40: " + (search(root, 40) ? "Found" : "Not Found"));
+        System.out.println("Searching for 100: " + (search(root, 100) ? "Found" : "Not Found"));
+
+        // Check if valid BST
+        System.out.println("\nIs valid BST? " + (isValidBST(root) ? "Yes" : "No"));
+
+        // Delete node using Inorder Predecessor
+        root = deleteUsingPredecessor(root, 50);
+        System.out.println("\nBST after deleting 50 using Inorder Predecessor:");
+        inorder(root);
+
+        // Reinsert for Successor test
+        root = insert(root, 50);
+        System.out.println("\n\nBST after reinserting 50:");
+        inorder(root);
+
+        // Delete node using Inorder Successor
+        root = deleteUsingSuccessor(root, 50);
+        System.out.println("\nBST after deleting 50 using Inorder Successor:");
+        inorder(root);
+    }
 }

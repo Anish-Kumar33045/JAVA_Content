@@ -1,5 +1,5 @@
 
 
-class B {
+public class B {
     public int marks;
 }

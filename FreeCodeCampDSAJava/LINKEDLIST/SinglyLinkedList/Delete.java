@@ -124,7 +124,7 @@ public void deleteNode(int key){
       ListNode fourth = new ListNode(40);
       ListNode fifth = new ListNode(50);
         
-      obj.head.next = second;  // why ??
+      obj.head.next = second;  
       second.next = third;
       third.next = fourth;
       fourth.next = fifth;
@@ -132,20 +132,20 @@ public void deleteNode(int key){
       System.out.println("intial Linked list");
       obj.display();
 
-      System.out.println("delete at first node");
-      obj.deleteFirst();
-      obj.display();
+      // System.out.println("delete at first node");
+      // obj.deleteFirst();
+      // obj.display();
 
-      System.out.println("delete at last node");
-      obj.deleteLast();
-      obj.display();
+      // System.out.println("delete at last node");
+      // obj.deleteLast();
+      // obj.display();
 
-      System.out.println("delete at positiion 1 ");
-      obj.deleteNode_Pos(1);
-      obj.display();
+      // System.out.println("delete at positiion 1 ");
+      // obj.deleteNode_Pos(1);
+      // obj.display();
 
-      System.out.println("delete the value 30 ");
-      obj.deleteNode(30);
-      obj.display();
+      // System.out.println("delete the value 30 ");
+      // obj.deleteNode(30);
+      // obj.display();
     }
 }

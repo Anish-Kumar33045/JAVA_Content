@@ -1,8 +1,8 @@
 /*
- *  it is called two way LInkedlist
+ *  it is called two way Linkedlist
  *  we can navigate list in both forward and backward direction
  *  in singly linked list to delete the node we need pointer to its previous node 
- *  but in doubly linked list we don't nedd any pointer to it's previous
+ *  but in doubly linked list we don't need any pointer to it's previous node
  * 
  * List Node in Doubly Linked List : 
  *   <--- previous | data | next ---> 
@@ -27,7 +27,7 @@ public class DoublyLL{
        protected ListNode previous;
        protected ListNode next;
 
-          public ListNode (int data){
+          public ListNode(int data){
              this.data = data;
           }
     }
@@ -71,7 +71,7 @@ public class DoublyLL{
         System.out.println("null");
     }
 
-    // insert the node at beginning of Doubly Lnked List
+    // insert the node at beginning of Doubly Linked List
        public void insertFront(int value){
         ListNode newNode = new ListNode(value);
         if(isEmpty()) {
@@ -143,10 +143,10 @@ public class DoublyLL{
         DoublyLL dll = new DoublyLL();
         int choice, value;
 
-        System.out.println("Circular linked list operations");
+        System.out.println(" DoublyLL linked list operations");
 
         while (true) {
-            System.out.println("\nCCL operations:");
+            System.out.println("\nDoublyLL operations:");
             System.out.println("1. InsertFront\n2. InsertRear\n3. DeleteFront\n4. DeleteRear\n5. DisplayForward \n 6.DisplayBackward \n7. Exit");
             System.out.print("Enter your choice: ");
             choice = in.nextInt();

@@ -1,3 +1,4 @@
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -6,7 +7,7 @@ public class GenerateBinaryNo {
 
     public String[] generate(int n) {
         String[] result = new String[n];
-        Queue<String> q = new LinkedList<>();
+        Queue<String> q = new LinkedList<>(); //This is polymorphism in Java — using an interface type (Queue) to refer to an object of a class (LinkedList) that implements it.
         q.offer("1");
 
         for (int i = 0; i < n; i++) {
@@ -29,8 +30,9 @@ public class GenerateBinaryNo {
         String[] binaryNumbers = obj.generate(n);
 
         System.out.println("Generated binary numbers:");
+
         for (String binary : binaryNumbers) {
-            System.out.println(binary);
+            System.out.print(binary + " ");
         }
 
         scanner.close();

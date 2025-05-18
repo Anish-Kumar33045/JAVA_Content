@@ -1,6 +1,8 @@
 
 class A{
 
+public char[] marks;
+
 public void show(){
     System.out.println(" in A show ");
 
