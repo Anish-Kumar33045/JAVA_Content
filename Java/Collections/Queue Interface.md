@@ -1,16 +1,17 @@
 # QueueInterface (FIFO)
 
 Since all these subclasses implement the queue, we can instantiate a queue object with any of these classes.
-
 For example:
+<pre>
 
 Queue <T> pq = new PriorityQueue<> ();
 Queue <T> ad = new ArrayDeque<> ();
-Where T is the type of the object.
 
+Where T is the type of the object.
+</pre>
 The most frequently used implementation of the queue interface is the PriorityQueue.
 
-1. Priority Queue
+## 1. Priority Queue
 
 - PriorityQueue is used when the objects are supposed to be processed based on priority.
 - follows the FIFO , but processed acc. to the priority .
@@ -27,11 +28,13 @@ The most frequently used implementation of the queue interface is the PriorityQu
 
 - Since ArrayDeque class implements the Deque interface, we can instantiate a deque object with this class.
   For example:
-
+<pre>
 Deque<T> ad = new ArrayDeque<> ();
 Where T is the type of the object.
+</pre>
 
-1. ArrayDeque
+
+## 1. ArrayDeque
 
 - ArrayDeque class provides resizable array.
 - This can grow and allow users to add or remove an element from both sides of the queue.
