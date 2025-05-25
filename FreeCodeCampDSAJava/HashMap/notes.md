@@ -59,14 +59,20 @@ static class Node<K,V> implements Map.Entry<K,V> {
 ### 🔸 2. How put(key, value) Works
 
 - map.put("abc", 123);
+
 - Hash Calculation:
    - It calculates a hash code using:
-
-
+   ``` java
       - int hash = hash(key); // Uses hashCode() and some internal mixing
-- Index Calculation:
+    ```
 
-    - index = (n - 1) & hash; // n = length of table (must be power of 2)
+- Index Calculation:
+    - index = hash % array 
+
+     `or usually we use below for better performance : `
+     ``` java
+    - index = (n - 1) & hash;  // n = length of table (must be power of 2) 
+    ```
 
 - Bucket Check:
 
@@ -97,6 +103,8 @@ static class Node<K,V> implements Map.Entry<K,V> {
    - If it's a linked list → traverse each node and compare keys
 
    - If it's a tree → use tree search
+  
+   - returns null if doesn't exists 
 
 ### 🔸 4. Resize (Rehashing)
  - If the load factor (default 0.75) is exceeded:
@@ -104,6 +112,11 @@ static class Node<K,V> implements Map.Entry<K,V> {
  - The table size is doubled (capacity × 2)
 
  - All existing entries are rehashed and redistributed
+
+### 🔸 5. remove (key)
+ - removes an entry with a key from hashMap
+
+ - returns null or value  
 
 
 ## How Collisions Are Handled in HashMap
@@ -172,9 +185,12 @@ When a bucket's linked list becomes too long (over 8), it converts into a balanc
 
  - Use when you want full control over performance:
 
-   - Initial capacity: controls the number of buckets
-
    - Load factor: controls when rehashing happens (default is 0.75)
+     - i.e  if num of elements is > 75% of capacity the double the size 
+   
+   - Threshold value : acceptable num of entries before the capacity is doubled 
+     
+     ` Threshold value = load factor x initial Capacity `
 
 4. `HashMap(Map<? extends K, ? extends V> map)`
  - Creates a new HashMap and copies all mappings from the given map.
@@ -187,7 +203,30 @@ When a bucket's linked list becomes too long (over 8), it converts into a balanc
 
 
 ## Iteration Techniques
-in HashMaps.java 
+in hashmap.java file
+
+
+## Hash functions 
+
+1. Division (Modulo)
+2. Mid-Square method 60 x 60 = 3600 => (60)
+3. Digit Folding Method 
+4. Multiplication method
+
+## Collision resolution techniques
+
+1. Chaining (Open hashing)
+2. Open Addressing (Closed Hashing) 
+  - Linear Probing     : `( H(k) + i ) % M `
+  - Quadratic probing  : `( H(k) + i^2 ) % M `
+  - Double Hashing     : ` H(k,i) = ( H1(k) + i * H2(k) ) % M  `
+    - more efficient than linear and quadratic probing 
+
+`Note : `
+> - probe num = Num of attempts
+> - M = size of hash table 
+> - % M because resulting index stays within Hash table limit 
+
 
 
 ##  Custom Key Objects in HashMap
@@ -214,6 +253,10 @@ HashMap uses hashCode() to find the bucket
   - Always override both equals() and hashCode() together.
 
   - Make key fields final to keep them immutable.
+
+`Note` : 
+  <div style="background-color : purple"> perfect hash function is which always generates unique index for unique inputs , nonperfect viceversa 
+  </div>
 
 
 
@@ -261,7 +304,7 @@ Fail-Fast is a runtime behavior of Java collections (like HashMap, ArrayList, et
 
  - If a collection is structurally modified after creating an iterator (except through the iterator itself),
 
- - The program throws ConcurrentModificationException immediately during iteration.
+ The program throws ConcurrentModificationException immediately during iteration.
 
 ### 🔹 What is a Structural Modification?
  - A structural modification is any operation that changes the size of the collection.
